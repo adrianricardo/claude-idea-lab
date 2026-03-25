@@ -25,12 +25,27 @@ showcase_path — where to write the showcase index.html
 
 ## Step 1 — Scan Ideas
 
-Read all `.md` files in `{ideas_path}/`. For each file:
+Read `.md` files from `{ideas_path}/`, applying the configured `idea_filter`:
+- **`folder`**: only scan files in `idea_folders` subfolders
+- **`tag`**: scan all files, only include those with `idea_tag` in frontmatter `tags`
+- **`stage`**: scan all files, only include those with a `stage` field in frontmatter
+- **`all`**: scan all files with frontmatter
+- **No filter set (standalone mode)**: read all files in `{ideas_path}/`
 
-1. Parse YAML frontmatter to extract: `name`, `slug`, `summary`, `stage`, `created`, `demo`, `prototype`
-2. Read the first log entry to get the idea description
-3. Check if a matching demo exists at `{demos_dir}/{slug}.html`
-4. Check if a matching prototype exists at `{demos_dir}/{slug}-prototype.html`
+For each matched file:
+
+1. Parse YAML frontmatter. **Skip files with no frontmatter** (not idea files).
+2. Extract fields, using fallbacks for missing ones:
+   - `name` — from frontmatter `name` or `title`, or derive from filename
+   - `slug` — from frontmatter, or derive from filename (kebab-case, strip leading numbers like `11.68-`)
+   - `summary` — from frontmatter, or first non-heading line of content
+   - `stage` — from frontmatter, default `seedling`
+   - `created` — from frontmatter `created` or `date`, or file modification date
+   - `demo` — from frontmatter, default `false`
+   - `prototype` — from frontmatter, default `false`
+3. Read the first log entry (if present) to get the idea description
+4. Check if a matching demo exists at `{demos_dir}/{slug}.html`
+5. Check if a matching prototype exists at `{demos_dir}/{slug}-prototype.html`
 
 Build an array of idea objects sorted by created date (newest first).
 

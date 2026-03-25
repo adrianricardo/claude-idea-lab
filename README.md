@@ -2,7 +2,7 @@
 
 A Claude Code plugin for capturing, developing, and showcasing ideas.
 
-Dump a raw idea → get it structured and saved → spar on it → see an interactive demo → flesh it out into a prototype. All from your terminal.
+Dump a raw idea → get it structured and saved → jam on it → see an interactive demo → flesh it out into a prototype. All from your terminal. Works standalone or with an existing Obsidian vault.
 
 ## Install
 
@@ -93,9 +93,23 @@ showcase_path: ~/idea-lab/index.html
 
 You can decline the global config during setup if you prefer local-only.
 
+## Obsidian Support
+
+During `/setup`, point to your vault and the plugin auto-detects Obsidian. It then asks how to find your ideas:
+
+- **By folder** — only scan specific subfolders (e.g., `Projects/Ideas/`)
+- **By tag** — notes tagged with e.g. `#idea` or `#project`
+- **By stage field** — notes that have a `stage` field in frontmatter
+- **Everything** — treat all markdown files as ideas
+
+No migration needed:
+- Reads your existing notes and gracefully handles missing fields
+- Skips files without YAML frontmatter
+- **Never rewrites your existing notes**
+- Demos are saved in a `demos/` subfolder within your vault
+
 ## v2 Roadmap
 
-- Obsidian vault integration
 - `/make-real` — add real logic and data to prototypes
 - Pipeline tracking across stages
 - Import/scan existing repos for demos
