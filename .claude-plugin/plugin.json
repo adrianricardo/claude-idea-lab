@@ -1,0 +1,8 @@
+{
+  "name": "claude-idea-lab",
+  "description": "Track and develop ideas with markdown notes, interactive demos, and a browsable showcase. Capture ideas fast, jam on them, generate visual demos, and flesh them out into prototypes.",
+  "version": "0.1.0",
+  "author": {
+    "name": "adrianricardo"
+  }
+}
