@@ -1,3 +1,9 @@
+---
+name: ideas
+description: Manage and browse your Idea Lab collection. List ideas, open the showcase, or check status.
+argument-hint: "[open | status]"
+---
+
 # Ideas
 
 Manage and browse your Idea Lab collection.
