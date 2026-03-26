@@ -6,40 +6,30 @@ version: 0.4.0
 
 # Showcase Generator
 
-Rebuild the Idea Lab showcase by running the bundled rebuild script.
+## CRITICAL: This skill is a single Bash command. Nothing else.
 
-## When This Skill Runs
-
-- **Internally:** Called by `/new-idea` and `/flesh-out` after creating or updating ideas
-- **Explicitly:** User says "regenerate showcase", "update showcase", "rebuild showcase"
-
-## How It Works
-
-Run the shell script bundled with the plugin:
+**Run this and you are done:**
 
 ```bash
 bash "${CLAUDE_PLUGIN_ROOT}/scripts/rebuild-showcase.sh"
 ```
 
-This script:
-1. Reads config from `.idea-lab.config.md`
-2. Scans all idea `.md` files and extracts frontmatter
-3. Writes `ideas.json` alongside the showcase
-4. Injects data into the HTML template and writes `index.html`
+That's it. Report the script's output to the user. Do NOT do anything else.
 
-It runs in ~100ms and requires no other tools or dependencies.
+**DO NOT:**
+- Scan or read idea markdown files
+- Parse frontmatter
+- Build JSON
+- Read or modify the HTML template
+- Use agents or subagents
+- Read the config file
 
-## Output
+The shell script handles ALL of that internally in ~100ms.
 
-The script writes two files:
-- `{showcase_dir}/ideas.json` — structured data for all ideas
-- `{showcase_path}` — self-contained HTML showcase with embedded data
+## When This Skill Runs
 
-## Rules
-
-- **Just run the script** — do not manually scan files, parse frontmatter, or build JSON
-- **Never modify the HTML template** — the script handles injection
-- **Never modify idea markdown files** — this skill is read-only on ideas
+- **Internally:** Called by `/new-idea` and `/flesh-out` after creating or updating ideas
+- **Explicitly:** User says "regenerate showcase", "update showcase", "rebuild showcase"
 
 ## Editing the Showcase Design
 
