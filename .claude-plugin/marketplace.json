@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "Track and develop ideas with markdown notes, interactive demos, and a browsable showcase",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   "plugins": [
     {
       "name": "claude-idea-lab",
       "description": "Capture ideas fast, jam on them, generate visual demos, and flesh them out into prototypes. Works standalone or with Obsidian vaults.",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "source": "./",
       "author": {
         "name": "adrianricardo"
