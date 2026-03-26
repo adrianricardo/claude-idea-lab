@@ -1,12 +1,12 @@
 ---
 name: showcase-generator
-description: Regenerate the Idea Lab showcase HTML from all idea markdown files. Reads ideas, parses frontmatter, builds a browsable UI with sidebar navigation, iframe demo loading, and "flesh out" copy-command buttons. Called internally by other skills after creating or updating ideas. Can also be invoked directly with "regenerate showcase" or "update showcase".
-version: 0.1.0
+description: Regenerate the Idea Lab showcase HTML from all idea markdown files. Reads ideas, parses frontmatter, builds a JSON array, and injects it into the HTML template. Called internally by other skills after creating or updating ideas. Can also be invoked directly with "regenerate showcase" or "update showcase".
+version: 0.2.0
 ---
 
 # Showcase Generator
 
-Rebuild the Idea Lab showcase HTML from the current set of idea markdown files.
+Rebuild the Idea Lab showcase by scanning idea files and injecting data into the HTML template.
 
 ## Configuration
 
@@ -34,123 +34,47 @@ Read `.md` files from `{ideas_path}/`, applying the configured `idea_filter`:
 
 For each matched file:
 
-1. Parse YAML frontmatter. **Skip files with no frontmatter** (not idea files).
-2. Extract fields, using fallbacks for missing ones:
-   - `name` — from frontmatter `name` or `title`, or derive from filename
-   - `slug` — from frontmatter, or derive from filename (kebab-case, strip leading numbers like `11.68-`)
+1. Parse YAML frontmatter. **Skip files with no frontmatter**.
+2. Extract fields:
+   - `id` — from frontmatter `slug`, or derive from filename (kebab-case, strip leading numbers like `11.68-`)
+   - `title` — from frontmatter `name` or `title`, or derive from filename
    - `summary` — from frontmatter, or first non-heading line of content
    - `stage` — from frontmatter, default `seedling`
-   - `created` — from frontmatter `created` or `date`, or file modification date
-   - `demo` — from frontmatter, default `false`
-   - `prototype` — from frontmatter, default `false`
-3. Read the first log entry (if present) to get the idea description
-4. Check if a matching demo exists at `{demos_dir}/{slug}.html`
-5. Check if a matching prototype exists at `{demos_dir}/{slug}-prototype.html`
+   - `tags` — from frontmatter, default `[]`
+   - `demos` — list of matching demo filenames found at `{demos_dir}/{slug}*.html`
+3. Sort by stage order (building → ready-to-build → spec → exploring → seedling), then alphabetically within stage.
 
-Build an array of idea objects sorted by created date (newest first).
+Build a JSON array of idea objects.
 
-## Step 2 — Generate Showcase HTML
+## Step 2 — Inject Data into Template
 
-Write a single self-contained HTML file to `{showcase_path}`. The file must:
+1. Read the HTML template at `${CLAUDE_PLUGIN_ROOT}/skills/showcase-generator/references/showcase-template.html`
+2. Find the data placeholder: `/*__IDEAS_DATA__*/[]`
+3. Replace it with the JSON array from Step 1: `/*__IDEAS_DATA__*/[{...}, ...]`
+4. Write the result to `{showcase_path}`
 
-### Structure
-- **Sidebar** (left, 340px): header, idea list with stage badges
-- **Main area** (right): either an idea detail view or an iframe loading a demo/prototype
-
-### Sidebar Content
-- Header: "Idea Lab" with a dot accent
-- Subtitle: "{count} ideas" with stage breakdown
-- List of ideas, each showing:
-  - Idea name (bold)
-  - One-line summary (secondary text)
-  - Stage badge with color coding:
-    - `seedling` — amber
-    - `exploring` — amber
-    - `spec` — purple
-    - `mock` — purple
-    - `building` — accent (coral)
-    - `launched` — green
-
-### Main Area — Tab Navigation
-When an idea is selected, the main area shows a **tab bar** at the top with:
-
-- **Demo** (default, selected first) — if a demo exists
-- **Prototype** — if a prototype exists
-- **Overview** — idea details and actions
-
-Tab bar styling: minimal, bottom-border active indicator using accent color. Same pattern as sidebar tabs.
-
-### Main Area — Demo Tab (Default)
-- Full-width iframe loading the demo HTML from `demos/` (relative path)
-- No chrome or back buttons — the tab bar handles navigation
-- If no demo exists, this tab is hidden and Overview becomes the default
-
-### Main Area — Prototype Tab
-- Full-width iframe loading the prototype HTML from `demos/` (relative path)
-- Only shown if a prototype exists
-
-### Main Area — Overview Tab
-- Idea name as heading
-- Stage badge
-- Summary
-- Full idea description (from the latest log entry)
-- "Flesh out" button that copies `/flesh-out {slug}` to clipboard with a toast notification: "Copied! Paste this into Claude Code"
-- If a prototype exists: "Make Real" button (disabled, labeled "Coming in v2")
-
-### Empty State
-If no ideas exist yet:
-- Centered message: "No ideas yet"
-- Instruction: "Run `/new-idea` in Claude Code to capture your first idea"
-
-### Design System
-
-Follow the reference template in `${CLAUDE_PLUGIN_ROOT}/skills/showcase-generator/references/showcase-template.md` for the exact CSS variables, typography, and component styles. The design uses:
-
-- **Font:** Inter (loaded from Google Fonts)
-- **Colors:** Light theme with warm coral accent (#E8553A)
-- **CSS Variables:** See reference template for full set
-- **Animations:** fadeUp on content transitions, smooth sidebar hover states
-- **Scrollbars:** Styled thin scrollbars on webkit
-
-### Data Embedding
-
-Embed the idea data as a JavaScript constant at the top of the `<script>` section:
-
-```javascript
-const IDEAS = [
-  {
-    name: "Idea Name",
-    slug: "idea-name",
-    summary: "One-liner summary",
-    stage: "seedling",
-    created: "2026-03-25",
-    hasDemo: true,
-    hasPrototype: false,
-    demoPath: "demos/idea-name.html",
-    prototypePath: null
-  },
-  // ...
-];
-```
-
-Use relative paths for demo/prototype files (assumes showcase is at the parent of demos/).
+**Important:** Do NOT modify any HTML, CSS, or JavaScript in the template. Only replace the data placeholder.
 
 ## Step 3 — Verify
-
-After writing the file, verify it exists:
 
 ```bash
 ls -la {showcase_path}
 ```
 
-Report how many ideas are in the showcase and offer to open it.
+Report how many ideas are in the showcase.
 
 ## Rules
 
-- **Always overwrite** the existing showcase file — it's fully regenerated each time
+- **Only replace the data placeholder** — never modify template HTML/CSS/JS
 - **Never modify idea markdown files** — this skill is read-only on ideas
-- **Use relative paths** for demo files in the HTML (e.g., `demos/slug.html`)
-- **Sort ideas** newest first by created date
-- **The showcase must work offline** — no external dependencies except the Google Fonts link (which degrades gracefully)
+- **Use relative paths** for demo files (e.g., `demos/slug.html`) — the showcase sits at the parent of `demos/`
+- **Sort ideas** by stage order, then alphabetically
+
+## Editing the Showcase Design
+
+To change the showcase's look and feel, edit the template directly:
+`${CLAUDE_PLUGIN_ROOT}/skills/showcase-generator/references/showcase-template.html`
+
+Then regenerate to apply changes.
 
 $ARGUMENTS

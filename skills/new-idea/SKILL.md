@@ -107,8 +107,6 @@ Also update the `summary` in frontmatter if the jam significantly changed the di
 
 ## Step 6 — Build Demo
 
-Always build a demo. Don't ask — just do it.
-
 ### Identify Compelling Moments
 
 Analyze the idea and identify 2-3 candidate moments from the user journey. Focus on:
@@ -120,6 +118,10 @@ Analyze the idea and identify 2-3 candidate moments from the user journey. Focus
 Present these as options using **AskUserQuestion**. Each option should have:
 - A short label (the moment name)
 - A description of what the demo would show
+
+**Always include a final option: "Skip demo generation for now".**
+
+If the user skips, jump directly to Step 7 (rebuild showcase) and Step 8 (report). The idea is still captured and will appear in the showcase without a demo.
 
 ### Build It
 

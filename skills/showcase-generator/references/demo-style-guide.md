@@ -13,11 +13,11 @@ Design standards for auto-generated idea demos and prototypes.
 ## Design Standards
 
 ### Aesthetic
-- Light theme: clean whites, subtle shadows, warm coral accent
+- Dark theme: deep navy backgrounds, subtle borders, amber accent
 - Font: Inter (Google Fonts), system-ui fallback
-- No blue accents
-- Frosted glass for overlays (backdrop-filter: blur)
+- Frosted glass for overlays (backdrop-filter: blur on dark surfaces)
 - Generous whitespace
+- Colored accents for emphasis (amber primary, green/purple/coral secondary)
 
 ### Simplicity
 - One primary interaction per view
@@ -45,7 +45,7 @@ Design standards for auto-generated idea demos and prototypes.
 
 ## CSS Variable Reference
 
-Use the same variables as the showcase (see showcase-template.md) for consistency when the demo is loaded in the iframe.
+Use the same CSS variables as the showcase template (`showcase-template.html`) for consistency when the demo is loaded in the iframe.
 
 ## What NOT to Include
 
