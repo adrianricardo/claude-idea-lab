@@ -142,7 +142,11 @@ Create a **single self-contained HTML file** with inline CSS and JS.
 
 ## Step 7 — Rebuild Showcase
 
-Invoke the **showcase-generator** skill to regenerate the showcase HTML with the new idea included.
+Run the rebuild script to regenerate the showcase with the new idea:
+
+```bash
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/rebuild-showcase.sh"
+```
 
 ## Step 8 — Report
 

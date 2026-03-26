@@ -149,7 +149,13 @@ Use **AskUserQuestion** to confirm before writing the global config to `~/.claud
 
 ## Step 7 — Initialize Showcase
 
-Invoke the **showcase-generator** skill to create the showcase HTML at `{showcase_path}`. It will scan existing ideas and demos. If no ideas exist yet, it should show a welcome state.
+Run the rebuild script to create the showcase HTML at `{showcase_path}`:
+
+```bash
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/rebuild-showcase.sh"
+```
+
+It will scan existing ideas and demos. If no ideas exist yet, it should show a welcome state.
 
 ## Step 8 — Report
 

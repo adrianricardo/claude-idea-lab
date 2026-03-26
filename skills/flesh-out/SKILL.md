@@ -108,7 +108,13 @@ Each screen is a `<div class="screen" data-screen="name">` that shows/hides.
 
 ## Step 5 — Rebuild Showcase
 
-Invoke the **showcase-generator** skill to regenerate the showcase HTML. The prototype should appear as a "View Prototype" button on the idea's detail page.
+Run the rebuild script to regenerate the showcase with the updated idea:
+
+```bash
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/rebuild-showcase.sh"
+```
+
+The prototype should appear as a "View Prototype" button on the idea's detail page.
 
 ## Step 6 — Report
 
