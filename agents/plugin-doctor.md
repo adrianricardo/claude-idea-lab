@@ -120,10 +120,19 @@ When asked to prepare for publication, check:
 - [ ] README.md documents installation and usage
 - [ ] No leftover test data or personal content in templates
 
+**After Every Change:**
+
+1. Bump the patch version in `.claude-plugin/plugin.json` (e.g., 0.4.1 → 0.4.2)
+2. Commit all changes
+3. Push to remote — the plugin is installed from the remote repo, so unpushed changes are invisible to testers
+4. Tell the user to start a fresh Claude Code session to test
+
+Never skip these steps. Every change needs a version bump and push.
+
 **Output Format:**
 
 After each fix, report:
 - What was wrong (root cause)
 - What files were changed
 - Whether other skills were affected
-- Whether a version bump is needed
+- New version number
