@@ -4,7 +4,7 @@ Manage and browse your Idea Lab collection.
 
 ## Configuration
 
-Read paths from `.idea-lab.config.md` (search: `{cwd}/` → `~/.claude/` → `~/idea-lab/`). If not found, tell the user to run `/setup` first.
+Read paths from `.idea-lab.config.md` (search: `{cwd}/` → `~/.claude/` → `~/idea-lab/`). If not found, tell the user to run `/idea-lab-setup` first.
 
 ## Commands
 
@@ -30,7 +30,7 @@ Sort by created date, newest first.
 open {showcase_path}
 ```
 
-If the showcase doesn't exist yet, tell the user to run `/setup`.
+If the showcase doesn't exist yet, tell the user to run `/idea-lab-setup`.
 
 ### `/ideas status` — Stage breakdown
 

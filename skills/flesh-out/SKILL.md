@@ -10,7 +10,7 @@ Take a captured idea and develop it further through a deep interview, then gener
 
 ## Configuration
 
-Read paths from `.idea-lab.config.md` (search: `{cwd}/` → `~/.claude/` → `~/idea-lab/`). If not found, tell the user to run `/setup`.
+Read paths from `.idea-lab.config.md` (search: `{cwd}/` → `~/.claude/` → `~/idea-lab/`). If not found, tell the user to run `/idea-lab-setup`.
 
 ```
 ideas_path    — directory containing idea markdown files

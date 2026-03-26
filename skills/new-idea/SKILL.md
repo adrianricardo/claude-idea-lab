@@ -10,7 +10,7 @@ Capture a new idea using the full idea protocol: recap, save, jam, demo.
 
 ## Configuration
 
-Read paths from `.idea-lab.config.md` (search: `{cwd}/` → `~/.claude/` → `~/idea-lab/`). If not found, tell the user to run `/setup` first.
+Read paths from `.idea-lab.config.md` (search: `{cwd}/` → `~/.claude/` → `~/idea-lab/`). If not found, tell the user to run `/idea-lab-setup` first.
 
 ```
 ideas_path   — where markdown idea files live

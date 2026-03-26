@@ -10,12 +10,12 @@ Dump a raw idea → get it structured and saved → jam on it → see an interac
 claude plugin add adrianricardo/claude-idea-lab
 ```
 
-Then run `/setup` to configure where your ideas live.
+Then run `/idea-lab-setup` to configure where your ideas live.
 
 ## Quick Start
 
 ```
-/setup                        # First-time config
+/idea-lab-setup               # First-time config
 /new-idea                     # Capture a new idea
 /ideas open                   # Open the showcase in your browser
 /flesh-out my-idea-name       # Deep dive → UX prototype
@@ -77,7 +77,7 @@ Log entries are append-only — the evolution of the idea is always visible.
 
 ## Configuration
 
-After `/setup`, config is written to two places:
+After `/idea-lab-setup`, config is written to two places:
 
 1. **`~/.claude/idea-lab.config.md`** — global, so `/new-idea` works from any repo
 2. **`{ideas_dir}/.idea-lab.config.md`** — local, so the config travels with your data
@@ -95,7 +95,7 @@ You can decline the global config during setup if you prefer local-only.
 
 ## Obsidian Support
 
-During `/setup`, point to your vault and the plugin auto-detects Obsidian. It then asks how to find your ideas:
+During `/idea-lab-setup`, point to your vault and the plugin auto-detects Obsidian. It then asks how to find your ideas:
 
 - **By folder** — only scan specific subfolders (e.g., `Projects/Ideas/`)
 - **By tag** — notes tagged with e.g. `#idea` or `#project`
@@ -106,7 +106,7 @@ No migration needed:
 - Reads your existing notes and gracefully handles missing fields
 - Skips files without YAML frontmatter
 - **Never rewrites your existing notes**
-- Demos are saved in a `demos/` subfolder within your vault
+- Demos are saved in a separate `demos/` directory (configurable — keeps vault clean)
 
 ## v2 Roadmap
 
