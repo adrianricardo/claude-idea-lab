@@ -120,7 +120,7 @@ mkdir -p {ideas_path}
 
 Write the config to **two locations**:
 
-1. **`~/.claude/idea-lab.config.md`** — global, so the plugin works from any repo
+1. **`~/.claude/.idea-lab.config.md`** — global, so the plugin works from any repo
 2. **`{showcase_dir}/.idea-lab.config.md`** — local, so the config travels with the showcase
 
 Both files have the same content:
@@ -163,7 +163,7 @@ Tell the user:
 
 All idea-lab skills should read config like this:
 
-1. Search for config in: `{cwd}/.idea-lab.config.md` → `~/.claude/idea-lab.config.md` → `~/idea-lab/.idea-lab.config.md`
+1. Search for config in: `{cwd}/.idea-lab.config.md` → `~/.claude/.idea-lab.config.md` → `~/idea-lab/.idea-lab.config.md`
 2. Parse the YAML frontmatter for paths
 3. If not found anywhere, tell the user to run `/idea-lab-setup` first (or trigger it automatically)
 

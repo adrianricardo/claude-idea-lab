@@ -10,7 +10,7 @@ Rebuild the Idea Lab showcase by scanning idea files and injecting data into the
 
 ## Configuration
 
-Read paths from `.idea-lab.config.md` (search: `{cwd}/` → `~/.claude/` → `~/idea-lab/`):
+Read paths from `.idea-lab.config.md` (search: `{cwd}/` → `~/.claude/` → `~/idea-lab/`). The filename is always `.idea-lab.config.md` (with leading dot) in all locations.
 
 ```
 ideas_path    — directory containing idea markdown files
