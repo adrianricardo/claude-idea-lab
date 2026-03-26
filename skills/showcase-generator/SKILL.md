@@ -1,7 +1,7 @@
 ---
 name: showcase-generator
 description: Regenerate the Idea Lab showcase HTML from all idea markdown files. Runs a bundled shell script that scans ideas, builds JSON, and injects it into the HTML template. Called internally by other skills after creating or updating ideas. Can also be invoked directly with "regenerate showcase" or "update showcase".
-version: 0.3.0
+version: 0.4.0
 ---
 
 # Showcase Generator
