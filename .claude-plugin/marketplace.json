@@ -1,0 +1,31 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-idea-lab",
+  "owner": {
+    "name": "adrianricardo"
+  },
+  "metadata": {
+    "description": "Track and develop ideas with markdown notes, interactive demos, and a browsable showcase",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "claude-idea-lab",
+      "description": "Capture ideas fast, jam on them, generate visual demos, and flesh them out into prototypes. Works standalone or with Obsidian vaults.",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "adrianricardo"
+      },
+      "repository": "https://github.com/adrianricardo/claude-idea-lab",
+      "keywords": [
+        "ideas",
+        "prototyping",
+        "demos",
+        "obsidian",
+        "showcase"
+      ],
+      "category": "productivity"
+    }
+  ]
+}
